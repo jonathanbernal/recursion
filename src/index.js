@@ -34,5 +34,43 @@ const fibRecursiveSequence = (number) => {
 
 let fibNumbersToGenerate = 5;
 
-console.log(`Iterative Fibonacci: ${fibIterativeSequence(5)}`);
-console.log(`Recursive Fibonacci: ${fibRecursiveSequence(5)}`);
+// console.log(`Iterative Fibonacci: ${fibIterativeSequence(5)}`);
+// console.log(`Recursive Fibonacci: ${fibRecursiveSequence(5)}`);
+
+const mergeSort = (list) => {
+    const merge = (firstList, secondList) => {
+        const sortedArray = [];
+        // current value pointers
+        let i = 0; // firstList
+        let j = 0; // secondList
+        let k = 0; // sortedArray
+
+        while(i < firstList.length && j < secondList.length) {
+              if(firstList[i] < secondList[j]) {
+                sortedArray[k++] = firstList[i++];
+              }
+              else
+                sortedArray[k++] = secondList[j++];
+        }
+        // copy any remaining elements from each list separatedly
+        for(i; i < firstList.length; i += 1) {
+            sortedArray[k++] = firstList[i];
+        }
+        for(j; j < secondList.length; j += 1) {
+            sortedArray[k++] = secondList[j];
+        }
+
+        return sortedArray;
+    }
+
+    if (list.length < 2)
+        return list;
+    else {
+        let firstHalf = mergeSort(list.slice(0, list.length / 2));
+        let secondHalf = mergeSort(list.slice(list.length / 2, list.length));
+        return merge(firstHalf, secondHalf);
+    }
+}
+
+
+console.log(mergeSort([6, 2, 9, 7, 3, 15, 1, 4]));
